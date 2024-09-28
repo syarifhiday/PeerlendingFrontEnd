@@ -20,9 +20,14 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MstUser" asp-action="Index">Data Users</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LenderBalance" asp-action="Index">My Balance</a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="MstLoan" asp-action="Index">Requested Loans</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="TrnLending" asp-action="Index">My Lending</a>
+                        </li>
                     </ul>
                     <button class="btn btn-outline-danger" id="logoutButton">Log out</button>
                 </div>
@@ -43,6 +48,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
     <script>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Lender Balance";
+    Layout = "_LayoutLender";
+}
+<div class="container balance-container">
+    <div class="balance-box">
+        <h3>Your Current Balance</h3>
+        <p class="balance-amount" id="balance">Loading...</p>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/balance.js"></script>
+}

@@ -3,7 +3,10 @@
 	ViewData["Title"] = "Master Data User";
 }
 
-<h2>Data Users</h2>
+<div class="d-flex">
+	<h2>Data Users</h2>
+	<button type="button" class="btn btn-success ms-4" onclick="addUser()">Add User</button>
+</div>
 <table class="table table-striped" id="userTable">
 	<thead>
 		<tr>
@@ -18,4 +21,79 @@
 	</tbody>
 </table>
 
-<script src="~/js/mstUser.js"></script>
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+			</div>
+			<div class="modal-body">
+				<form id="addUserForm" method="post">
+					<div class="form-group">
+						<label for="addUserName">Name</label>
+						<input type="text" class="form-control" id="addUserName" required />
+					</div>
+					<div class="form-group">
+						<label for="addUserEmail">Email</label>
+						<input type="email" class="form-control" id="addUserEmail" required />
+					</div>
+					<div class="form-group">
+						<label>Role</label>
+						<select class="form-control" id="addUserRole" required>
+							<option value="lender">Lender</option>
+							<option value="borrower">Borrower</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Balance</label>
+						<input type="number" class="form-control" id="addUserBalance" value="0" readonly />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="saveNewUser()">Add User</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade" id="editUserModal" tabindex="-a" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+			</div>
+			<div class="modal-body">
+				<form id="editUserForm" method="post">
+					<div class="form-group">
+						<label for="userName">Name</label>
+						<input type="text" class="form-control" id="userName" required/>
+					</div>
+					<div class="form-group">
+						<label>Role</label>
+						<select class="form-control" id="userRole" required>
+							<option value="lender">Lender</option>
+							<option value="borrower">Borrower</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Balance</label>
+						<input type="number" class="form-control" id="userBalance" required />
+					</div>
+					<input type="hidden" id="userId" />
+					</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="updateUser()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/mstUser.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+}

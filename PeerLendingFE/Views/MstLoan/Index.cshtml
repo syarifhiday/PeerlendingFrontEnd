@@ -1,0 +1,49 @@
+﻿
+@{
+	ViewData["Title"] = "Master Data User";
+
+    Layout = "_LayoutLender";
+}
+
+<div class="d-flex">
+    <h2>Requested Loans</h2>
+</div>
+<table class="table table-striped" id="loanTable">
+    <thead>
+        <tr>
+            <th>Borrower Name</th>
+            <th>Loan Amount</th>
+            <th>Interest</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<!-- Modal for changing loan status -->
+<div class="modal fade" id="changeLoanStatusModal" tabindex="-1" role="dialog" aria-labelledby="changeLoanStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeLoanStatusModalLabel">Change Loan Status</h5>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to change the loan status to "funded"?</p>
+                <input type="hidden" id="loanId" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="changeLoanStatus()">Confirm</button>
+                <button type="button" class="btn btn-secondary" onclick="hideChangeStatusModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/mstLoan.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+}
