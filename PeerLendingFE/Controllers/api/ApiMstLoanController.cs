@@ -15,7 +15,35 @@ namespace PeerLendingFE.Controllers.api
             _httpClient = httpClient;
         }
 
-        [HttpGet]
+		[HttpPost]
+		public async Task<IActionResult> AddLoan([FromBody] ReqCreateLoanDto reqCreateLoanDto)
+		{
+			if (reqCreateLoanDto == null)
+			{
+				return BadRequest("Invalid loan data");
+			}
+
+			var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+			var json = JsonSerializer.Serialize(reqCreateLoanDto);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+			var response = await _httpClient.PostAsync("https://localhost:7158/api/v1/loan/NewLoan", content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				var jsonData = await response.Content.ReadAsStringAsync();
+				return Ok(jsonData); 
+			}
+			else
+			{
+				return BadRequest("Failed to add loan");
+			}
+		}
+
+
+		[HttpGet]
         public async Task<IActionResult> GetLoans()
         {
             var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
@@ -24,6 +52,25 @@ namespace PeerLendingFE.Controllers.api
             var response = await _httpClient.GetAsync("https://localhost:7158/api/v1/loan/LoanList?status=requested");
             var responseData = await response.Content.ReadAsStringAsync();
             
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok(responseData);
+            }
+            else
+            {
+                return BadRequest("Fetch failed");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetLoansByBorrowerId(string borrower_id)
+        {
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.GetAsync("https://localhost:7158/api/v1/loan/RequestedLoanByBorrowerId?borrower_id="+borrower_id);
+            var responseData = await response.Content.ReadAsStringAsync();
+
             if (response.IsSuccessStatusCode)
             {
                 return Ok(responseData);

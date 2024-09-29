@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "My Requested Loan";
+
+    Layout = "_LayoutBorrower";
+}
+
+<div class="d-flex">
+    <h2>My Requested Loan</h2>
+	<button type="button" class="btn btn-success ms-4" onclick="reqNewLoan()">Request Loan</button>
+</div>
+<table class="table table-striped" id="loanTable">
+    <thead>
+        <tr>
+            <th>Loan Amount</th>
+            <th>Interest Rate</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Requested At</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div class="modal fade" id="addLoanModal" tabindex="-1" role="dialog" aria-labelledby="addLoanModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addLoanModalLabel">Request a Loan</h5>
+			</div>
+			<div class="modal-body">
+				<form id="addUserForm" method="post">
+					<div class="form-group">
+						<label for="addLoanAmount">Amount</label>
+						<input type="number" class="form-control" id="addLoanAmount" required />
+					</div>
+					<div class="form-group">
+						<label for="addLoanInterestRate">Interest Rate</label>
+						<input type="number" class="form-control" id="addLoanInterestRate" value="2.5" required />
+					</div>
+					<div class="form-group">
+						<label>Duration (Month)</label>
+						<input type="number" class="form-control" id="addLoanDuration" value="12" readonly />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="createNewLoan()">Request Loan</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/borrowerLending.js"></script> 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+}

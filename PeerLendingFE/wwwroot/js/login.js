@@ -27,7 +27,7 @@
             } else if (userRole === 'lender') {
                 window.location.href = '/LenderBalance';
             } else if (userRole === 'borrower') {
-                window.location.href = '/BorrowerDashboard';
+                window.location.href = '/BorrowerLoan';
             }
         } else {
             alert(result.message || 'Login failed. Please try again!');

@@ -2,7 +2,7 @@
 
 namespace PeerLendingFE.Controllers
 {
-    public class TrnFunding : Controller
+    public class BorrowerLoanController : Controller
     {
         public IActionResult Index()
         {
