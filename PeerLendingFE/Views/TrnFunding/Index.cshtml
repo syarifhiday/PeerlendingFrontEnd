@@ -1,0 +1,29 @@
+﻿@{
+	ViewData["Title"] = "My Funding";
+
+    Layout = "_LayoutLender";
+}
+
+<div class="d-flex">
+    <h2>My Funding</h2>
+</div>
+<table class="table table-striped" id="fundingTable">
+    <thead>
+        <tr>
+            <th>Borrower Name</th>
+            <th>Loan Amount</th>
+            <th>Interest Rate</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Funded At</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/trnFunding.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+}

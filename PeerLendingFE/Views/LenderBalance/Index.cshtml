@@ -4,13 +4,39 @@
 }
 <div class="container balance-container">
     <div class="balance-box">
-        <h3>Your Current Balance</h3>
+        <div class="d-flex">
+            <h3>Your Current Balance</h3>
+            <button type="button" class="btn btn-success ms-4" data-toggle="modal" data-target="#editBalanceModal">Top Up</button>
+        </div>
         <p class="balance-amount" id="balance">Loading...</p>
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="editBalanceModal" tabindex="-a" role="dialog" aria-labelledby="editBalanceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBalancelLabel">Top Up Balance</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editBalanceForm" method="post">
+                    <div class="form-group">
+                        <label>Add to balance</label>
+                        <input type="number" class="form-control" id="userBalance" required />
+                    </div>
+                    <input type="hidden" id="userId" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="updateBalance()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
+    <script src="~/js/balance.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/balance.js"></script>
 }

@@ -113,7 +113,60 @@ namespace PeerLendingFE.Controllers.api
 		}
 
 
-		[HttpDelete]
+        [HttpPut]
+        public async Task<IActionResult> UpdateBalanceUser(string id, [FromBody] ReqUpdateBalanceDto reqUpdateBalanceDto)
+        {
+            if (reqUpdateBalanceDto == null)
+            {
+                return BadRequest("Invalid data");
+            }
+
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var json = JsonSerializer.Serialize(reqUpdateBalanceDto);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync($"https://localhost:7158/api/v1/user/UpdateBalanceUser?id=" + id, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                return Ok(jsonData);
+            }
+            else
+            {
+                return BadRequest("Failed to update balance");
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> DecreaseBalanceUser(string id, [FromBody] ReqUpdateBalanceDto reqUpdateBalanceDto)
+        {
+            if (reqUpdateBalanceDto == null)
+            {
+                return BadRequest("Invalid data");
+            }
+
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var json = JsonSerializer.Serialize(reqUpdateBalanceDto);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync($"https://localhost:7158/api/v1/user/DecreaseBalanceUser?id=" + id, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                return Ok(jsonData);
+            }
+            else
+            {
+                return BadRequest("Failed to update balance");
+            }
+        }
+
+
+        [HttpDelete]
 		public async Task<IActionResult> DeleteUser(string id)
 		{
 			if (string.IsNullOrEmpty(id))

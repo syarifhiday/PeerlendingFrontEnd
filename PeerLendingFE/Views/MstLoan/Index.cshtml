@@ -13,7 +13,7 @@
         <tr>
             <th>Borrower Name</th>
             <th>Loan Amount</th>
-            <th>Interest</th>
+            <th>Interest Rate</th>
             <th>Duration</th>
             <th>Status</th>
             <th>Action</th>
@@ -28,10 +28,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="changeLoanStatusModalLabel">Change Loan Status</h5>
+                <h5 class="modal-title" id="changeLoanStatusModalLabel">Fund Loan</h5>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to change the loan status to "funded"?</p>
+                <p>Are you sure you want to fund this loan?</p>
+                <div class="loan-details">
+                    <p><strong>Borrower Name:</strong> <span id="modalBorrowerName"></span></p>
+                    <p><strong>Loan Amount:</strong> <span id="modalLoanAmount"></span></p>
+                    <p><strong>Interest Rate:</strong> <span id="modalInterestRate"></span></p>
+                    <p><strong>Duration:</strong> 12 months</p>
+                </div>
+                <!-- Hidden input for loanId -->
                 <input type="hidden" id="loanId" />
             </div>
             <div class="modal-footer">
@@ -41,6 +48,7 @@
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     <script src="~/js/mstLoan.js"></script>

@@ -169,6 +169,7 @@ async function updateUser() {
 
 }
 
+
 async function deleteUser(id) {
     const token = localStorage.getItem('jwtToken');
 

@@ -21,7 +21,7 @@ namespace PeerLendingFE.Controllers.api
             var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var response = await _httpClient.GetAsync("https://localhost:7158/api/v1/loan/LoanList");
+            var response = await _httpClient.GetAsync("https://localhost:7158/api/v1/loan/LoanList?status=requested");
             var responseData = await response.Content.ReadAsStringAsync();
             
             if (response.IsSuccessStatusCode)
