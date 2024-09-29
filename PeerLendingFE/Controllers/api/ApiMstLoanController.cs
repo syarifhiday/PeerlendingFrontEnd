@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PeerLendingFE.DTO.Req;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -63,12 +64,27 @@ namespace PeerLendingFE.Controllers.api
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetLoansByBorrowerId(string borrower_id)
+        public async Task<IActionResult> GetLoansByBorrowerId()
         {
+            // Retrieve the token from the Authorization header
             var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+            // Decode the JWT token to extract claims
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            // Extract borrower_id from the claims (adjust claim type as necessary)
+            var borrowerIdClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "Id"); // or whatever the claim type is
+            if (borrowerIdClaim == null)
+            {
+                return BadRequest("Borrower ID not found in token");
+            }
+
+            var borrower_id = borrowerIdClaim.Value; // Get the borrower_id from the claim
+
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var response = await _httpClient.GetAsync("https://localhost:7158/api/v1/loan/RequestedLoanByBorrowerId?borrower_id="+borrower_id);
+            var response = await _httpClient.GetAsync($"https://localhost:7158/api/v1/loan/RequestedLoanByBorrowerId?borrower_id={borrower_id}");
             var responseData = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)

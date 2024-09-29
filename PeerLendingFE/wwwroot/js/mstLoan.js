@@ -66,6 +66,7 @@ async function changeLoanStatus() {
     const decodedToken = jwt_decode(token);
     const lender_id = decodedToken.Id;
     const amount = parseFloat(document.getElementById('modalLoanAmount').textContent);
+    const interest_rate = parseFloat(document.getElementById('modalInterestRate').textContent);
     console.log("user id : " + lender_id);
 
 
@@ -122,6 +123,27 @@ async function changeLoanStatus() {
 
     if (!response3.ok) {
         alert('Failed to create funding');
+        return;
+    }
+
+    const reqCreateRepaymentDto = {
+        "loan_id": loanId,
+        "interest_rate": interest_rate,
+        "amount": amount,
+        "duration": 12
+    }
+
+    const response4 = await fetch('/ApiTrnRepayment/CreateRepayment/', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reqCreateRepaymentDto)
+    });
+
+    if (!response4.ok) {
+        alert('Failed to create repayment');
         return;
     }
 

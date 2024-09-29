@@ -3,9 +3,7 @@ let selectedLending = null; // to keep track of the current lending
 
 async function fetchLendings() {
     const token = localStorage.getItem('jwtToken');
-    const decodedToken = jwt_decode(token);
-    const id = decodedToken.Id;
-    const response = await fetch('/ApiTrnLending/GetLendings/' + id, {
+    const response = await fetch('/ApiTrnLending/GetLendings/', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token
